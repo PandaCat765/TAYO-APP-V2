@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TAYO Panelist Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <datalist id="courseList"></datalist>
+    <div class="device-stage" aria-label="iPhone prototype preview">
+      <div class="iphone-frame">
+        <span class="iphone-side iphone-side-left top"></span>
+        <span class="iphone-side iphone-side-left middle"></span>
+        <span class="iphone-side iphone-side-right"></span>
+        <div class="iphone-screen">
+          <div class="iphone-status" aria-hidden="true">
+            <span class="iphone-time">9:41</span>
+            <span class="dynamic-island"></span>
+            <span class="iphone-icons">
+              <span class="cell-bars"><i></i><i></i><i></i><i></i></span>
+              <span class="wifi-mark"></span>
+              <span class="battery-mark"><i></i></span>
+            </span>
+          </div>
+
+    <section class="auth-flow entry-mode" id="authFlow">
+      <header class="auth-top">
+        <a class="brand" href="#" data-auth-screen="welcome" aria-label="TAYO welcome">
+          <span class="brand-mark">T</span>
+          <span><strong>TAYO</strong><small>Ateneo event companion</small></span>
+        </a>
+        <div class="auth-status">
+          <span id="flowStepText">Welcome</span>
+          <span id="flowProgressText">Step 1 of 8</span>
+        </div>
+      </header>
+
+      <main class="flow-stage">
+        <section class="flow-panel active" data-panel="welcome">
+          <div class="panel-copy">
+            <p class="eyebrow">Welcome to TAYO</p>
+            <h1>Welcome to TAYO!</h1>
+            <p>Please select sign up or log in.</p>
+          </div>
+          <div class="choice-grid">
+            <button class="choice-card" type="button" data-auth-screen="signup">
+              <span class="choice-number">01</span>
+              <strong>Sign up</strong>
+              <small>First-time users answer profile, interest, and personality questions.</small>
+            </button>
+            <button class="choice-card" type="button" data-auth-screen="login">
+              <span class="choice-number">02</span>
+              <strong>Log in</strong>
+              <small>Returning users go straight to their event dashboard.</small>
+            </button>
+          </div>
+        </section>
+
+        <section class="flow-panel" data-panel="signup">
+          <div class="panel-copy">
+            <p class="eyebrow">Start of signup</p>
+            <h1>VERIFICATION</h1>
+            <p>Use your Ateneo email and password.</p>
+          </div>
+          <form class="flow-form" id="signupForm">
+            <label>Ateneo email
+              <input id="signupEmail" type="email" value="nikki@obf.ateneo.edu" autocomplete="email">
+            </label>
+            <label>Password
+              <input id="signupPassword" type="password" value="prototype123" autocomplete="new-password">
+            </label>
+            <p class="form-message" id="signupMessage"></p>
+            <div class="form-actions">
+              <button class="ghost" type="button" data-auth-screen="welcome">Back</button>
+              <button class="primary" type="submit">Create account</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="flow-panel" data-panel="login">
+          <div class="panel-copy">
+            <p class="eyebrow">Start of login</p>
+            <h1>LOG IN</h1>
+            <p>Enter your Ateneo email and password.</p>
+          </div>
+          <form class="flow-form" id="loginForm">
+            <label>Email
+              <input id="loginEmail" type="email" value="nikki@obf.ateneo.edu" autocomplete="email">
+            </label>
+            <label>Password
+              <input id="loginPassword" type="password" value="prototype123" autocomplete="current-password">
+            </label>
+            <p class="form-message" id="loginMessage"></p>
+            <div class="form-actions">
+              <button class="ghost" type="button" data-auth-screen="welcome">Back</button>
+              <button class="primary" type="submit">Login</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="flow-panel" data-panel="role">
+          <div class="panel-copy">
+            <p class="eyebrow">User selection</p>
+            <h1>Sino Ka?</h1>
+            <p>Select how this Ateneo account will use TAYO.</p>
+          </div>
+          <div class="choice-grid">
+            <button class="choice-card" type="button" data-role="student">
+              <span class="choice-number">S</span>
+              <strong>I’m just a user!</strong>
+              <small>Take profile, tag, and personality matching.</small>
+            </button>
+            <button class="choice-card" type="button" data-role="organizer">
+              <span class="choice-number">O</span>
+              <strong>Ateneo Org ©</strong>
+              <small>Submit or manage an event listing.</small>
+            </button>
+          </div>
+        </section>
+
+        <section class="flow-panel" data-panel="orgPasscode">
+          <div class="panel-copy">
+            <p class="eyebrow">Organizer access</p>
+            <h1>Org Passcode</h1>
+            <p>Please enter your organization passcode. No passcode, no going in :(</p>
+          </div>
+          <form class="flow-form" id="orgPasscodeForm">
+            <label>Org passcode
+              <input id="orgPasscodeInput" type="text" value="TAYO-ORG" autocomplete="off">
+            </label>
+            <p class="form-message" id="orgPasscodeMessage"></p>
+            <div class="form-actions">
+              <button class="ghost" type="button" data-auth-screen="role">Back</button>
+              <button class="primary" type="submit">Continue</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="flow-panel" data-panel="organizer">
+          <div class="panel-copy">
+            <p class="eyebrow">Organizer preview</p>
+            <h1>Organizer accounts can prepare event cards for matching.</h1>
+            <p>This branch is intentionally lighter for now, but it shows panelists that organizers have a separate use case.</p>
+          </div>
+          <div class="organizer-preview">
+            <label>Event title<input type="text" value="Sample Org Event"></label>
+            <label>Audience
+              <select>
+                <option>All Ateneo students</option>
+                <option>All Ateneans</option>
+                <option>Ateneo faculty and staff</option>
+                <option>Undergraduate students</option>
+                <option>Graduate students</option>
+                <option>First-year students</option>
+                <option>Transfer students</option>
+                <option>Dormers</option>
+                <option>Student leaders</option>
+                <option>First years</option>
+                <option>SOM students</option>
+                <option>SOSE students</option>
+                <option>SOH students</option>
+                <option>SOSS students</option>
+                <option>GBSEALD students</option>
+                <option>LS-wide community</option>
+              </select>
+            </label>
+            <label>Tags<input type="text" value="orgs, chill, beginner-friendly"></label>
+          </div>
+          <div class="form-actions">
+            <button class="ghost" type="button" data-auth-screen="role">Back to role selection</button>
+            <button class="primary" type="button" id="organizerToApp">Preview student app</button>
+          </div>
+        </section>
+
+        <section class="flow-panel" data-panel="profileSetup">
+          <div class="panel-copy">
+            <p class="eyebrow">Profile</p>
+            <h1>WHO YOU?</h1>
+            <p>Please complete your profile.</p>
+          </div>
+          <form class="flow-form wide-form" id="studentProfileForm">
+            <label>Year level
+              <select id="yearLevel" required>
+                <option value="">Select year level</option>
+                <option>1st year</option>
+                <option>2nd year</option>
+                <option>3rd year</option>
+                <option>4th year</option>
+                <option>5th year or higher</option>
+                <option>Graduate student</option>
+              </select>
+            </label>
+            <label>Course
+              <select id="courseInput" required></select>
+            </label>
+            <label>School
+              <select id="schoolInput" required>
+                <option value="">Select school</option>
+                <option value="SOM">SOM - John Gokongwei School of Management</option>
+                <option value="SOSE">SOSE - School of Science and Engineering</option>
+                <option value="SOH">SOH - School of Humanities</option>
+                <option value="SOSS">SOSS - School of Social Sciences</option>
+              </select>
+            </label>
+            <label>Age
+              <input id="ageInput" type="number" min="16" max="35" value="18" required>
+            </label>
+            <label>Sex / gender
+              <select id="genderInput">
+                <option>Prefer not to say</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Non-binary</option>
+                <option>Self-describe</option>
+              </select>
+            </label>
+            <label>Hobbies
+              <textarea id="hobbiesInput" rows="3">coffee, basketball, exhibits, casual talks</textarea>
+            </label>
+            <div class="form-actions full-span">
+              <button class="ghost" type="button" data-auth-screen="role">Back</button>
+              <button class="primary" type="submit">Continue to interests</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="flow-panel" data-panel="interests">
+          <div class="panel-copy">
+            <p class="eyebrow">Interest tags</p>
+            <h1>What do you want to see?</h1>
+            <p>Pick your interests and preferences.</p>
+          </div>
+          <div class="tag-layout">
+            <div>
+              <h3>Interest tags</h3>
+              <div class="tag-grid" id="interestTags"></div>
+            </div>
+            <aside class="subtag-panel">
+              <h3 id="subtagTitle">Subtags</h3>
+              <div class="subtag-actions">
+                <button class="ghost small-button" type="button" id="selectAllSubtags">Select all</button>
+              </div>
+              <div class="tag-grid compact" id="subtagGrid"></div>
+            </aside>
+          </div>
+          <p class="form-message" id="interestMessage"></p>
+          <div class="form-actions">
+            <button class="ghost" type="button" data-auth-screen="profileSetup">Back</button>
+            <button class="primary" type="button" id="continueToPersonality">Continue to personality</button>
+          </div>
+        </section>
+
+        <section class="flow-panel" data-panel="personality">
+          <div class="panel-copy">
+            <p class="eyebrow">Personality test</p>
+            <h1>MAY PA SOMETHING KA?</h1>
+            <p>TAYO recommends events using your profile, interests, subtags, and social style</p>
+          </div>
+          <form class="question-list" id="personalityForm"></form>
+        </section>
+
+        <section class="flow-panel" data-panel="result">
+          <div class="panel-copy">
+            <p class="eyebrow">Your TAYO type is...</p>
+            <img class="personality-visual" id="personalityVisual" src="assets/tayo-types/independent.png" alt="The Independent Explorer">
+            <h1 id="personalityTitle">Your TAYO type is ready.</h1>
+            <p id="personalityDescription"></p>
+          </div>
+          <div class="result-grid">
+            <article class="result-card">
+              <span class="badge match">Algorithm summary</span>
+              <h3>How TAYO will recommend</h3>
+              <p id="algorithmSummary"></p>
+            </article>
+            <article class="result-card">
+              <span class="badge safe">Suggested first move</span>
+              <h3 id="suggestedMoveTitle">Start with Quick Match</h3>
+              <p id="suggestedMoveBody"></p>
+            </article>
+          </div>
+          <div class="form-actions">
+            <button class="ghost" type="button" data-auth-screen="personality">Retake questions</button>
+            <button class="primary" type="button" data-auth-screen="tutorial">Continue to onboarding</button>
+          </div>
+        </section>
+
+        <section class="flow-panel" data-panel="tutorial">
+          <div class="panel-copy">
+            <p class="eyebrow">Quick onboarding</p>
+            <h1>Four tabs, one short tour.</h1>
+            <p>Panelists can see how TAYO explains Home, Map, Quick Match, and Profile before dropping users into the app.</p>
+          </div>
+          <div class="tab-tour">
+            <article><strong>Home</strong><span>Personal overview, pending tasks, and top picks.</span></article>
+            <article><strong>Map</strong><span>Campus places and directions from known landmarks.</span></article>
+            <article><strong>Quick Match</strong><span>Swipe or review events that fit your matching profile.</span></article>
+            <article><strong>Profile</strong><span>Update year level, course, tags, and personality style.</span></article>
+          </div>
+          <div class="form-actions">
+            <button class="ghost" type="button" id="skipTutorial">Skip tutorial</button>
+            <button class="primary" type="button" data-auth-screen="firstEvent">Review complete</button>
+          </div>
+        </section>
+
+        <section class="flow-panel" data-panel="firstEvent">
+          <div class="panel-copy">
+            <p class="eyebrow">First event decision</p>
+            <h1>Sign up to your first event now?</h1>
+          </div>
+          <div class="first-event-grid" id="firstEventGrid"></div>
+          <div class="form-actions">
+            <button class="ghost" type="button" id="goHomeFromFlow">Skip for now</button>
+            <button class="primary" type="button" id="goQuickMatchFromFlow">Sign up</button>
+          </div>
+        </section>
+      </main>
+    </section>
+
+    <div class="app hidden" id="appShell">
+      <aside class="rail" aria-label="Primary navigation">
+        <a class="brand" href="#home" aria-label="TAYO home">
+          <span class="brand-mark">T</span>
+          <span><strong>TAYO</strong><small id="profileMiniLabel">Student match profile</small></span>
+        </a>
+        <nav class="nav">
+          <a class="active" href="#home" data-route="home" aria-label="Home">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.4 12 3l9 7.4v9.1a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 19.5v-9.1Z"/></svg>
+            <span>Home</span>
+          </a>
+          <a href="#map" data-route="map" aria-label="Map">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 8-2 5 2v16l-5-2-8 2-5-2V2l5 2Zm1 2.1v11.5l6-1.5V4.6L9 6.1Zm-4-1v11.5l2 .8V5.9l-2-.8Zm12-.5v11.5l2 .8V5.4l-2-.8Z"/></svg>
+            <span>Map</span>
+          </a>
+          <a href="#quickmatch" data-route="quickmatch" aria-label="Quick Match">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2h11A2.5 2.5 0 0 1 20 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 19.5v-15Zm2 0v15c0 .3.2.5.5.5h11c.3 0 .5-.2.5-.5v-15c0-.3-.2-.5-.5-.5h-11c-.3 0-.5.2-.5.5ZM11 7h2v4h4v2h-4v4h-2v-4H7v-2h4V7Z"/></svg>
+            <span>Quick Match</span>
+          </a>
+          <a href="#events" data-route="events" aria-label="Events">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h2.5A2.5 2.5 0 0 1 22 6.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-13A2.5 2.5 0 0 1 4.5 4H7V2Zm13 8H4v9.5c0 .3.2.5.5.5h15c.3 0 .5-.2.5-.5V10ZM4.5 6c-.3 0-.5.2-.5.5V8h16V6.5c0-.3-.2-.5-.5-.5h-15Z"/></svg>
+            <span>Events</span>
+          </a>
+          <a href="#profile" data-route="profile" aria-label="Profile">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.7 0-8.5 2.8-8.5 6.2 0 1 .8 1.8 1.8 1.8h13.4c1 0 1.8-.8 1.8-1.8 0-3.4-3.8-6.2-8.5-6.2Z"/></svg>
+            <span>Profile</span>
+          </a>
+        </nav>
+        <div class="profile-mini">
+          <span class="avatar" id="avatarInitials">NS</span>
+          <span><strong id="profileMiniName">Nikki Santos</strong><small id="profileMiniMeta">1st year, SOM</small></span>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <h1 id="pageTitle">Home</h1>
+            <p id="pageSubtitle">Personalized event recommendations for Ateneo students.</p>
+          </div>
+          <div class="actions">
+            <button class="ghost theme-toggle" type="button" id="themeToggle" aria-pressed="false">Dark mode</button>
+            <button class="ghost" type="button" id="restartFlow">Restart flow</button>
+            <button class="primary" type="button" data-route-button="quickmatch">Quick Match</button>
+          </div>
+        </header>
+
+        <section class="view active" id="home">
+          <div class="hero compact-hero">
+            <div class="hero-copy">
+              <p class="eyebrow" id="homeTypeLabel">Personality match ready</p>
+              <h2 id="homeHeadline">Your week is sorted by what feels easiest to join.</h2>
+              <p id="homeSummary"></p>
+              <div class="hero-stats">
+                <span><strong id="matchCountStat">10</strong> matched events</span>
+                <span><strong id="interestCountStat">0</strong> interests</span>
+                <span><strong id="interestedCountStat">0</strong> interested</span>
+              </div>
+            </div>
+            <aside class="home-next">
+              <span class="badge match">Recommended next</span>
+              <h3 id="homeTopEventTitle">Quick Match</h3>
+              <p id="homeTopEventBody"></p>
+              <button class="primary" type="button" data-route-button="quickmatch">Review match</button>
+            </aside>
+          </div>
+
+          <div class="home-grid" id="homeCards"></div>
+          <section class="saved-events-section">
+            <div class="section-head compact-head">
+              <div>
+                <h2>Interested events</h2>
+                <p>Events you saved from Quick Match or event details.</p>
+              </div>
+            </div>
+            <div class="home-saved-list" id="homeSavedEvents"></div>
+          </section>
+        </section>
+
+        <section class="view" id="map">
+          <div class="section-head">
+            <div>
+              <h2>Campus locations</h2>
+              <p>Tap a place to see event context and simple directions from Leong Hall.</p>
+            </div>
+          </div>
+          <div class="chip-row" id="mapFilters"></div>
+          <div class="chip-row week-row" id="mapWeekFilters" aria-label="Filter event pins by week"></div>
+          <div class="map-layout">
+            <div class="map-board" id="mapBoard" aria-label="Clickable campus map">
+              <div class="map-zone north-zone">North academic ridge</div>
+              <div class="map-zone central-zone">Central walk</div>
+              <div class="map-zone south-zone">Fields and courts</div>
+              <div class="campus-road main-road"></div>
+              <div class="campus-road cross-road"></div>
+              <div class="campus-road east-road"></div>
+              <div class="campus-road field-road"></div>
+              <div class="map-building" style="left:17%;top:20%;width:15%;height:9%;">Leong</div>
+              <div class="map-building" style="left:36%;top:22%;width:19%;height:8%;">SEC Walk</div>
+              <div class="map-building" style="left:61%;top:25%;width:15%;height:8%;">Gonzaga</div>
+              <div class="map-building" style="left:72%;top:37%;width:15%;height:9%;">JSEC</div>
+              <div class="map-building large" style="left:55%;top:56%;width:20%;height:13%;">Rizal Library</div>
+              <div class="map-building" style="left:22%;top:55%;width:16%;height:10%;">Areté</div>
+              <div class="map-field" style="left:28%;top:73%;width:26%;height:13%;">Bellarmine Field</div>
+              <div class="map-field" style="left:61%;top:75%;width:25%;height:13%;">Blue Eagle Gym</div>
+            </div>
+            <aside class="map-side">
+              <article class="place-panel" id="placePanel"></article>
+              <article class="route-card" id="routeCard"></article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="quickmatch">
+          <div class="section-head">
+            <div>
+              <h2>Review recommended events</h2>
+              <p>Filter the queue, open details, then pass, save interest, or sign up.</p>
+            </div>
+            <p id="eventCount">Showing events</p>
+          </div>
+
+          <div class="quickmatch-layout">
+            <article class="swipe-card" id="swipeCard"></article>
+            <aside class="match-list-panel">
+              <div class="filters compact-filters">
+                <label>Type
+                  <select id="eventType">
+                    <option value="all">All types</option>
+                    <option value="org">Org events</option>
+                    <option value="social">Social gatherings</option>
+                    <option value="department">Department events</option>
+                  </select>
+                </label>
+                <label>Social energy
+                  <select id="eventEnergy">
+                    <option value="all">Any energy</option>
+                    <option value="chill">Chill</option>
+                    <option value="outgoing">Outgoing</option>
+                    <option value="both">Chill or outgoing</option>
+                  </select>
+                </label>
+                <label>Venue
+                  <select id="eventVenue">
+                    <option value="all">Indoor and outdoor</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="outdoor">Outdoor</option>
+                  </select>
+                </label>
+                <label>Access
+                  <select id="eventAccess">
+                    <option value="all">All access</option>
+                    <option value="open">Open to all</option>
+                    <option value="org-exclusive">Org-exclusive</option>
+                    <option value="limited">Limited seats</option>
+                    <option value="paid">Paid access</option>
+                    <option value="year-level">Year level</option>
+                  </select>
+                </label>
+              </div>
+              <div class="chip-row">
+                <button class="chip active" type="button" data-event-quick="all">All</button>
+                <button class="chip" type="button" data-event-quick="top">Best match</button>
+                <button class="chip" type="button" data-event-quick="chill">Chill</button>
+                <button class="chip" type="button" data-event-quick="outgoing">Outgoing</button>
+                <button class="chip" type="button" data-event-quick="archive">Archive</button>
+              </div>
+              <div class="event-list" id="eventList"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="view" id="events">
+          <div class="section-head">
+            <div>
+              <h2>Event overview</h2>
+              <p>Calendar-style view of upcoming events from Quick Match.</p>
+            </div>
+            <label class="map-month-control">Month
+              <select id="overviewMonth"></select>
+            </label>
+          </div>
+          <div class="calendar-board" id="eventCalendar"></div>
+        </section>
+
+        <section class="view" id="profile">
+          <div class="section-head">
+            <div>
+              <h2>Matching profile</h2>
+              <p>Edit the student basics that influence recommendations.</p>
+            </div>
+          </div>
+          <div class="profile-grid">
+            <article class="profile-card">
+              <h3>Student profile</h3>
+              <form class="profile-edit" id="profileEditForm">
+                <label>Year level
+                  <select id="profileYear"></select>
+                </label>
+                <label>Course
+                  <select id="profileCourse"></select>
+                </label>
+                <label>School
+                  <select id="profileSchool">
+                    <option value="SOM">SOM</option>
+                    <option value="SOSE">SOSE</option>
+                    <option value="SOH">SOH</option>
+                    <option value="SOSS">SOSS</option>
+                  </select>
+                </label>
+                <label>Age
+                  <input id="profileAge" type="number" min="16" max="35">
+                </label>
+                <button class="primary" type="submit">Save and update matches</button>
+              </form>
+            </article>
+            <article class="profile-card">
+              <h3>Edit interests</h3>
+              <div class="tag-grid" id="profileInterestTags"></div>
+              <div class="profile-subtag-edit">
+                <h3 id="profileSubtagTitle">Subtags</h3>
+                <div class="subtag-actions">
+                  <button class="ghost small-button" type="button" id="profileSelectAllSubtags">Select all</button>
+                </div>
+                <div class="tag-grid compact" id="profileSubtagGrid"></div>
+              </div>
+            </article>
+            <article class="profile-card" id="profileOutput"></article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="detail-overlay" id="eventDetail" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <article class="detail-modal">
+        <header class="detail-head">
+          <div>
+            <div class="badge-row" id="detailBadges"></div>
+            <h2 id="detailTitle">Event details</h2>
+            <p id="detailSubtitle"></p>
+          </div>
+          <button class="close-detail" type="button" id="closeDetail" aria-label="Close details">x</button>
+        </header>
+        <div class="detail-body">
+          <div class="detail-main">
+            <section class="detail-section">
+              <h3>Why TAYO recommended it</h3>
+              <p id="detailWhy"></p>
+              <ul class="detail-list" id="detailReasons"></ul>
+            </section>
+            <section class="detail-section">
+              <h3>What to expect</h3>
+              <p id="detailExpect"></p>
+            </section>
+          </div>
+          <aside class="detail-side">
+            <section class="detail-side-card">
+              <h3>Details</h3>
+              <ul class="detail-list" id="detailFacts"></ul>
+            </section>
+            <section class="detail-side-card">
+              <h3>Actions</h3>
+              <div class="detail-actions">
+                <button class="ghost" type="button" id="modalPass">Pass</button>
+                <button class="primary" type="button" id="modalInterested">Interested</button>
+                <button class="secondary" type="button" id="modalSignup">Sign up</button>
+                <button class="ghost" type="button" id="modalDirections">Directions</button>
+              </div>
+              <p class="mini" id="detailStatus"></p>
+            </section>
+          </aside>
+        </div>
+      </article>
+    </div>
+
+    <div class="tour-overlay" id="tourOverlay" aria-live="polite">
+      <article class="tour-card">
+        <p class="eyebrow" id="tourStepLabel">Step 1 of 5</p>
+        <h2 id="tourTitle">Home</h2>
+        <p id="tourBody"></p>
+        <div class="tour-actions">
+          <button class="ghost" type="button" id="tourSkip">Skip</button>
+          <button class="primary" type="button" id="tourNext">Next</button>
+        </div>
+      </article>
+    </div>
+
+          <div class="iphone-home-indicator" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

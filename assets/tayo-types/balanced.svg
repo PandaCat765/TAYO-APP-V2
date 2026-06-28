@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" role="img" aria-label="The Balanced Participant">
+  <rect width="390" height="844" fill="#fff9f1"/>
+  <text x="195" y="168" text-anchor="middle" fill="#ffc627" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600">Your TAYO type is...</text>
+  <g transform="translate(95 222)">
+    <ellipse cx="103" cy="94" rx="58" ry="56" fill="#f6b2b0"/>
+    <ellipse cx="80" cy="43" rx="18" ry="43" fill="#f6b2b0"/>
+    <ellipse cx="126" cy="43" rx="18" ry="43" fill="#f6b2b0"/>
+    <circle cx="82" cy="93" r="5" fill="#3d332e"/>
+    <circle cx="121" cy="93" r="5" fill="#3d332e"/>
+    <path d="M98 105h11m-6-3v15m-20-5c8 8 16 8 21 0m1 0c7 8 15 8 22 0" fill="none" stroke="#3d332e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="55" y="81" width="36" height="18" rx="7" fill="none" stroke="#5a86c4" stroke-width="4"/>
+    <rect x="113" y="81" width="36" height="18" rx="7" fill="none" stroke="#5a86c4" stroke-width="4"/>
+    <path d="M91 90h22" stroke="#5a86c4" stroke-width="4"/>
+    <g transform="translate(172 76)">
+      <path d="M2 27h45v12c0 17-10 27-23 27S2 56 2 39Z" fill="#5a86c4"/>
+      <path d="M46 33c15 0 15 22 0 22" fill="none" stroke="#5a86c4" stroke-width="8"/>
+      <path d="M12 9c0-12 10-12 10-24m14 24c0-12 10-12 10-24m14 24c0-12 10-12 10-24" fill="none" stroke="#ffc627" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+  <text x="195" y="504" text-anchor="middle" fill="#ffc627" font-family="'Arial Narrow', Impact, sans-serif" font-size="48" font-weight="900">THE BALANCED</text>
+  <text x="195" y="560" text-anchor="middle" fill="#ffc627" font-family="'Arial Narrow', Impact, sans-serif" font-size="48" font-weight="900">PARTICIPANT</text>
+  <text x="195" y="608" text-anchor="middle" fill="#ffc627" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700">
+    <tspan x="195">Preferred Environment: Low-stimulation</tspan>
+    <tspan x="195" dy="19">spaces, small-scale groups, and independent,</tspan>
+    <tspan x="195" dy="19">self-paced, or focused activities.</tspan>
+  </text>
+</svg>
