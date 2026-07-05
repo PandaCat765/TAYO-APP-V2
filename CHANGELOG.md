@@ -10,6 +10,6 @@
 
 ### Onboarding dim overlay
 - Changed screen/component: onboarding demo overlay.
-- What changed: Raised the onboarding scrim above app content and bottom nav, started it below the fake iPhone status bar, and kept the tour card above the scrim.
-- Why it changed: The demo modal was bright, but parts of the app behind it were not consistently dimmed because later CSS lowered the overlay z-index.
+- What changed: Added a `tour-active` layer contract so app content and bottom nav stay under the scrim, the fake iPhone status bar stays clean, and the tour card remains above the dim layer.
+- Why it changed: The overlay was already rendered directly inside `.iphone-screen`, but repeated z-index rules and the bottom nav layer made the Home header/stat area appear brighter than the rest of the dimmed app.
 - Known issues: None found in code review; visual QA should confirm in the browser.

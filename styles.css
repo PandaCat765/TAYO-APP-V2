@@ -8826,24 +8826,34 @@ body[data-panel="profileSetup"] .flow-panel[data-panel="profileSetup"] #studentP
   color: var(--paper) !important;
 }
 
-/* Onboarding scrim: dims the full app below the fake iPhone status bar. */
+/* Tour layer contract: app + bottom nav < scrim < card, while fake status bar stays clean above the scrim. */
 .iphone-screen .tour-overlay {
   position: absolute !important;
-  inset: 58px 0 0 0 !important;
+  inset: 54px 0 0 0 !important;
   z-index: 9000 !important;
   display: none !important;
   align-items: flex-end !important;
   justify-content: center !important;
   padding: 0 18px 76px !important;
-  background: rgba(64, 54, 49, 0.54) !important;
-  border-radius: 0 !important;
+  background: rgba(64, 54, 49, 0.62) !important;
+  border-radius: 0 0 52px 52px !important;
   pointer-events: none !important;
   box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 .iphone-screen .tour-overlay.open {
   display: flex !important;
   pointer-events: auto !important;
+}
+
+body.tour-active .iphone-screen .rail {
+  z-index: 100 !important;
+}
+
+body.tour-active .iphone-screen .iphone-status {
+  z-index: 9100 !important;
+  background: var(--paper) !important;
 }
 
 .iphone-screen .tour-overlay .tour-card {

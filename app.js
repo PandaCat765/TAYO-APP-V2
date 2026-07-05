@@ -1533,6 +1533,7 @@ function signupEvent(eventId, options = {}) {
 
 function openTutorial() {
   document.body.dataset.panel = "app";
+  document.body.classList.add("tour-active");
   qs("#authFlow").classList.add("hidden");
   qs("#appShell").classList.remove("hidden");
   state.tourIndex = 0;
@@ -1543,6 +1544,7 @@ function openTutorial() {
 
 function closeTutorial(nextPanel = "firstEvent") {
   qs("#tourOverlay").classList.remove("open");
+  document.body.classList.remove("tour-active");
   if (!nextPanel) return;
   qs("#appShell").classList.add("hidden");
   qs("#authFlow").classList.remove("hidden");
