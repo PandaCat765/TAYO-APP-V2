@@ -2101,12 +2101,13 @@ main {
   --blue-soft: #dce8fb;
   --green: #403631;
   --shadow: none;
+  --display-font: "Helvetica World", "Helvetica Neue", Helvetica, ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   background: #f2f0ec;
   color: var(--ink);
-  font-family: "Helvetica World", "Helvetica Neue", Helvetica, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--display-font);
 }
 
 .device-stage {
@@ -6357,6 +6358,11 @@ body[data-panel="profileSetup"] .flow-panel[data-panel="profileSetup"] .form-act
   margin-right: auto !important;
   margin-left: auto !important;
   box-sizing: border-box !important;
+}
+
+body[data-panel="profileSetup"] .flow-panel[data-panel="profileSetup"],
+body[data-panel="profileSetup"] .flow-panel[data-panel="profileSetup"] * {
+  font-family: var(--display-font) !important;
 }
 
 body[data-panel="profileSetup"] .flow-panel[data-panel="profileSetup"] .panel-copy {
