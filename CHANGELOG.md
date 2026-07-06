@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-07-06
+
+### Persistent project context
+- Changed screen/component: project documentation and future Codex handoff.
+- What changed: Added `TAYO_CONTEXT.md` with project structure, app flow, HTML containers, JavaScript architecture, styling notes, tutorial overlay guidance, event date logic, deployment rules, and Git safety workflow.
+- Why it changed: Future Codex sessions need a single source of truth before editing the prototype.
+- Known issues: None.
+
 ## 2026-07-05
 
 ### Profile setup typography
