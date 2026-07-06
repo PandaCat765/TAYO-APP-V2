@@ -14,6 +14,10 @@ GitHub Pages keeps the same public link and shows the latest pushed version from
 
 ## Vercel
 
+Production link:
+
+https://tayo-github-pages.vercel.app
+
 Vercel automatic Git deployments are disabled through `vercel.json`:
 
 ```json
