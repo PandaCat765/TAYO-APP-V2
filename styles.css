@@ -8826,17 +8826,17 @@ body[data-panel="profileSetup"] .flow-panel[data-panel="profileSetup"] #studentP
   color: var(--paper) !important;
 }
 
-/* Tour layer contract: app + bottom nav < scrim < card, while fake status bar stays clean above the scrim. */
+/* Tour layer contract: app/status/nav < scrim < card, so no bright top strip leaks through. */
 .iphone-screen .tour-overlay {
   position: absolute !important;
-  inset: 54px 0 0 0 !important;
+  inset: 0 !important;
   z-index: 9000 !important;
   display: none !important;
   align-items: flex-end !important;
   justify-content: center !important;
-  padding: 0 18px 76px !important;
+  padding: 54px 18px 76px !important;
   background: rgba(64, 54, 49, 0.62) !important;
-  border-radius: 0 0 52px 52px !important;
+  border-radius: inherit !important;
   pointer-events: none !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
@@ -8852,8 +8852,8 @@ body.tour-active .iphone-screen .rail {
 }
 
 body.tour-active .iphone-screen .iphone-status {
-  z-index: 9100 !important;
-  background: var(--paper) !important;
+  z-index: 100 !important;
+  background: transparent !important;
 }
 
 .iphone-screen .tour-overlay .tour-card {
