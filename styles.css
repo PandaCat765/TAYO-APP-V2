@@ -1151,8 +1151,11 @@ main {
 .place-pin {
   position: absolute;
   z-index: 3;
+  display: inline-grid;
+  place-items: center;
   width: 32px;
   height: 32px;
+  padding: 0;
   transform: translate(-50%, -50%);
   border: 2px solid white;
   border-radius: 8px;
@@ -1160,7 +1163,37 @@ main {
   color: white;
   font-size: 12px;
   font-weight: 700;
+  line-height: 1;
+  overflow: hidden;
   box-shadow: 0 2px 8px rgba(20, 32, 28, 0.18);
+}
+
+.place-pin-icon-wrap,
+.place-pin-fallback {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.place-pin-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.place-pin-icon[hidden],
+.place-pin-fallback[hidden] {
+  display: none;
+}
+
+.place-pin-fallback {
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
 .place-pin.active {

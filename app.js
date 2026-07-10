@@ -526,6 +526,22 @@ function renderMapFilterIcon(value, label) {
   `;
 }
 
+function renderMapPinIcon(value, label) {
+  const iconPath = mapCategoryIcons[mapCategoryIconKey(value)];
+  const fallback = categoryPinLabels[value] || mapCategoryFallback(label || value || "Map");
+
+  if (!iconPath) {
+    return `<span class="place-pin-fallback" aria-hidden="true">${fallback}</span>`;
+  }
+
+  return `
+    <span class="place-pin-icon-wrap" aria-hidden="true">
+      <img class="place-pin-icon" src="${iconPath}" alt="" loading="lazy" onerror="this.hidden = true; this.nextElementSibling.hidden = false;">
+      <span class="place-pin-fallback" hidden>${fallback}</span>
+    </span>
+  `;
+}
+
 const months = ["all", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
 
 const personalityQuestions = [
@@ -1168,7 +1184,8 @@ function renderMap() {
     pin.type = "button";
     pin.style.left = `${place.x}%`;
     pin.style.top = `${place.y}%`;
-    pin.textContent = categoryPinLabels[place.category] || "M";
+    const categoryMeta = mapCategories.find(([value]) => value === place.category);
+    pin.innerHTML = renderMapPinIcon(place.category, categoryMeta ? categoryMeta[1] : place.category);
     pin.setAttribute("aria-label", place.name);
     pin.addEventListener("click", () => selectPlace(place.id, place));
     board.appendChild(pin);

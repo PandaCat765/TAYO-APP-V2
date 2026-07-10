@@ -4,6 +4,7 @@
 
 ### Map category filters
 - Map: Added SVG icons to category filter chips with text fallbacks for categories without exported icons.
+- Map: Reused category SVG icons inside map pins while preserving text fallbacks for missing icons.
 
 ## 2026-07-06
 
