@@ -482,6 +482,50 @@ const mapCategories = [
   ["landmarks", "Landmarks"]
 ];
 
+const mapCategoryIcons = {
+  events: "assets/map-icons/events.svg",
+  food: "assets/map-icons/food.svg",
+  landmarks: "assets/map-icons/landmarks.svg",
+  miscellaneous: "assets/map-icons/miscellaneous.svg",
+  offices: "assets/map-icons/offices.svg",
+  printing: "assets/map-icons/printing.svg",
+  "student-life": "assets/map-icons/student-life.svg",
+  study: "assets/map-icons/study.svg",
+  parking: null,
+  transport: null,
+  sports: null
+};
+
+function mapCategoryIconKey(value) {
+  return value === "misc" ? "miscellaneous" : value;
+}
+
+function mapCategoryFallback(label) {
+  return label
+    .split(/\s+/)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
+function renderMapFilterIcon(value, label) {
+  if (value === "all") return "";
+  const iconPath = mapCategoryIcons[mapCategoryIconKey(value)];
+  const fallback = mapCategoryFallback(label);
+
+  if (!iconPath) {
+    return `<span class="map-filter-fallback" aria-hidden="true">${fallback}</span>`;
+  }
+
+  return `
+    <span class="map-filter-icon-wrap" aria-hidden="true">
+      <img class="map-filter-icon" src="${iconPath}" alt="" loading="lazy" onerror="this.hidden = true; this.nextElementSibling.hidden = false;">
+      <span class="map-filter-fallback" hidden>${fallback}</span>
+    </span>
+  `;
+}
+
 const months = ["all", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
 
 const personalityQuestions = [
@@ -1073,7 +1117,10 @@ function renderHome() {
 
 function renderMapFilters() {
   qs("#mapFilters").innerHTML = mapCategories.map(([value, label]) => `
-    <button class="chip ${value === state.activeMapCategory ? "active" : ""}" type="button" data-map-filter="${value}">${label}</button>
+    <button class="chip map-filter-chip ${value === state.activeMapCategory ? "active" : ""}" type="button" data-map-filter="${value}">
+      ${renderMapFilterIcon(value, label)}
+      <span class="map-filter-label">${label}</span>
+    </button>
   `).join("");
 }
 

@@ -7407,6 +7407,48 @@ body[data-route="map"] #mapWeekFilters {
   box-shadow: 0 10px 0 var(--paper) !important;
 }
 
+body[data-route="map"] #mapFilters .map-filter-chip {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+body[data-route="map"] #mapFilters .map-filter-icon-wrap,
+body[data-route="map"] #mapFilters .map-filter-fallback {
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+}
+
+body[data-route="map"] #mapFilters .map-filter-icon {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+body[data-route="map"] #mapFilters .map-filter-icon[hidden],
+body[data-route="map"] #mapFilters .map-filter-fallback[hidden] {
+  display: none !important;
+}
+
+body[data-route="map"] #mapFilters .map-filter-fallback {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1.5px solid currentColor !important;
+  border-radius: 999px !important;
+  font-size: 8px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+body[data-route="map"] #mapFilters .map-filter-label {
+  min-width: 0 !important;
+  white-space: nowrap !important;
+}
+
 body[data-route="map"] #mapWeekFilters {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;

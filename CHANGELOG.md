@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-07-10
+
+### Map category filters
+- Map: Added SVG icons to category filter chips with text fallbacks for categories without exported icons.
+
 ## 2026-07-06
 
 ### Persistent project context
