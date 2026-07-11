@@ -1676,7 +1676,6 @@ function passListEvent(eventId) {
 
 function restoreEvent(eventId) {
   state.passedEventIds.delete(eventId);
-  state.activeEventQuick = "all";
   state.quickIndex = 0;
   renderApp();
   routeTo("quickmatch");
