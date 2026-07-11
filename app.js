@@ -1369,8 +1369,8 @@ function renderSwipeCard(event) {
     </div>
     <p>${event.description}</p>
     <div class="swipe-actions">
-      ${archived ? `<button class="secondary" type="button" data-restore-event="${event.id}">Restore</button>` : `<button class="ghost" type="button" data-pass-event="${event.id}">Pass</button><button class="primary" type="button" data-interested-event="${event.id}">Interested</button>`}
-      <button class="ghost" type="button" data-signup-event="${event.id}">Sign up</button>
+      ${archived ? `<button class="secondary" type="button" data-restore-event="${event.id}">Restore</button>` : `<button class="ghost compact-action" type="button" data-pass-event="${event.id}" aria-label="Pass">✕</button><button class="primary compact-action" type="button" data-interested-event="${event.id}" aria-label="Interested">✓</button>`}
+      <button class="ghost" type="button" data-signup-event="${event.id}">Details</button>
     </div>
   `;
 }
@@ -1391,8 +1391,8 @@ function renderEventList(list) {
           <span>Deadline: ${deadlineLabel(event)}</span>
         </div>
         <div class="event-actions">
-          ${state.activeEventQuick === "archive" ? `<button class="secondary" type="button" data-restore-event="${event.id}">Restore</button>` : `<button class="ghost" type="button" data-list-pass-event="${event.id}">Pass</button><button class="secondary" type="button" data-interested-event="${event.id}">Interested</button>`}
-          <button class="primary" type="button" data-signup-event="${event.id}">Sign up</button>
+          ${state.activeEventQuick === "archive" ? `<button class="secondary" type="button" data-restore-event="${event.id}">Restore</button>` : `<button class="ghost compact-action" type="button" data-list-pass-event="${event.id}" aria-label="Pass">✕</button><button class="secondary compact-action" type="button" data-interested-event="${event.id}" aria-label="Interested">✓</button>`}
+          <button class="primary" type="button" data-signup-event="${event.id}">Details</button>
         </div>
       </div>
     </article>
@@ -1545,8 +1545,10 @@ function openEventDetail(eventId) {
     <li><strong>Social energy:</strong> ${energyLabel(event.energy)}</li>
   `;
   qs("#detailStatus").textContent = "";
-  qs("#modalInterested").textContent = state.interestedEventIds.has(event.id) ? "Unsave" : "Interested";
-  qs("#modalPass").textContent = state.passedEventIds.has(event.id) ? "Passed" : "Pass";
+  qs("#modalInterested").textContent = state.interestedEventIds.has(event.id) ? "Unsave" : "Save";
+  qs("#modalInterested").setAttribute("aria-label", state.interestedEventIds.has(event.id) ? "Unsave event" : "Save as interested");
+  qs("#modalPass").textContent = "✕";
+  qs("#modalPass").setAttribute("aria-label", state.passedEventIds.has(event.id) ? "Passed event" : "Pass event");
   qs("#modalPass").disabled = state.passedEventIds.has(event.id);
   qs("#modalDirections").hidden = !(event.mapQuery || event.area === "outside");
   document.body.classList.add("detail-open");
@@ -1979,7 +1981,8 @@ function bindListeners() {
     if (!state.currentEventId) return;
     const wasSaved = state.interestedEventIds.has(state.currentEventId);
     markInterested(state.currentEventId, { advance: false, route: false });
-    qs("#modalInterested").textContent = wasSaved ? "Interested" : "Unsave";
+    qs("#modalInterested").textContent = wasSaved ? "Save" : "Unsave";
+    qs("#modalInterested").setAttribute("aria-label", wasSaved ? "Save as interested" : "Unsave event");
     qs("#detailStatus").textContent = wasSaved ? "Removed from interested events." : "Marked interested.";
     if (wasSaved && state.activeRoute === "home") closeEventDetail();
   });

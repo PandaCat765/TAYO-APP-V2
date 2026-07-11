@@ -8960,3 +8960,13 @@ body[data-route="map"] .map-board .place-pin.food.active,
 body[data-route="map"] .place-pin.food.active {
   background: #4a4039 !important;
 }
+
+/* Compact event action buttons */
+.compact-action {
+  min-width: 42px !important;
+  width: 42px !important;
+  padding-inline: 0 !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
