@@ -217,9 +217,6 @@
                 <option>Self-describe</option>
               </select>
             </label>
-            <label>Hobbies
-              <textarea id="hobbiesInput" rows="3">coffee, basketball, exhibits, casual talks</textarea>
-            </label>
             <div class="form-actions full-span">
               <button class="ghost" type="button" data-auth-screen="role">Back</button>
               <button class="primary" type="submit">Continue to interests</button>
@@ -246,6 +243,11 @@
               <div class="tag-grid compact" id="subtagGrid"></div>
             </aside>
           </div>
+          <label class="extra-interest-field">
+            Anything else you’d like to see?
+            <textarea id="hobbiesInput" rows="3" placeholder="cafes, fashion, startups, K-pop, running, photography"></textarea>
+            <small>Type extra interests that are not listed here. TAYO will try to match you with similar events when available.</small>
+          </label>
           <p class="form-message" id="interestMessage"></p>
           <div class="form-actions">
             <button class="ghost" type="button" data-auth-screen="profileSetup">Back</button>

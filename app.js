@@ -980,6 +980,32 @@ function renderPersonalityResult() {
   renderFirstEventGrid();
 }
 
+function profileHobbyKeywords() {
+  return (state.profile.hobbies || "")
+    .toLowerCase()
+    .split(/[,\n]/)
+    .map((item) => item.trim())
+    .filter((item) => item.length >= 3);
+}
+
+function eventKeywordText(event) {
+  return [
+    event.title,
+    event.description,
+    event.expect,
+    event.goodFor,
+    event.location,
+    event.type,
+    event.energy,
+    ...(event.interests || []),
+    ...(event.subtags || []),
+    ...(event.extraTags || [])
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
 function eventMatchesPersonality(event, personality) {
   const fit = new Set(event.personalityFit || []);
   if (personality === "independent") {
@@ -1015,6 +1041,13 @@ function scoreEvent(event) {
     score += 12;
     reasons.push(`Fits ${personalityTypes[state.profile.personality].title}`);
   }
+
+  const hobbyHits = profileHobbyKeywords().filter((keyword) => eventKeywordText(event).includes(keyword));
+  if (hobbyHits.length) {
+    score += Math.min(12, hobbyHits.length * 4);
+    reasons.push(`Matches hobbies: ${hobbyHits.join(", ")}`);
+  }
+
   if (event.schoolTags.includes(state.profile.school)) {
     score += 5;
     reasons.push(`Relevant for ${state.profile.school} students`);
@@ -1842,6 +1875,9 @@ function bindListeners() {
   });
 
   qs("#continueToPersonality").addEventListener("click", () => {
+    const hobbiesInput = qs("#hobbiesInput");
+    if (hobbiesInput) state.profile.hobbies = hobbiesInput.value.trim();
+
     if (!state.profile.interests.length) {
       setMessage("#interestMessage", "Select at least one interest tag before continuing.", "error");
       return;
