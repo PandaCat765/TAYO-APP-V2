@@ -1209,7 +1209,7 @@ function renderHome() {
   qs("#homeSavedEvents").innerHTML = savedEvents.length
     ? savedEvents.map((event, index) => `
       <article class="home-event-card ${index > 0 ? "dark-card" : ""}" data-details="${event.id}">
-        <figure><img src="${event.image}" alt="${event.title}" loading="lazy"></figure>
+        <figure class="event-card-photo"><img src="${event.image}" alt="${event.title}" loading="lazy" onerror="this.closest('figure').classList.add('image-failed'); this.remove();"></figure>
         <h3>${event.title}</h3>
         <div class="mini-badges">
           <span>${event.location}</span>
@@ -1445,7 +1445,7 @@ function renderSwipeCard(event) {
   swipeCard.dataset.details = event.id;
   swipeCard.innerHTML = `
     <figure class="event-photo large">
-      <img src="${event.image}" alt="${event.title}" loading="lazy">
+      <img src="${event.image}" alt="${event.title}" loading="lazy" onerror="this.closest('figure').classList.add('image-failed'); this.remove();">
     </figure>
     <div class="figma-event-title-row">
       <h3>${event.title}</h3>
@@ -1469,7 +1469,7 @@ function renderSwipeCard(event) {
 function renderEventList(list) {
   qs("#eventList").innerHTML = list.map((event) => `
     <article class="event-row" data-details="${event.id}">
-      <img class="event-thumb" src="${event.image}" alt="${event.title}" loading="lazy">
+      <img class="event-thumb" src="${event.image}" alt="${event.title}" loading="lazy" onerror="this.classList.add('image-failed'); this.removeAttribute('src');">
       <div class="event-row-body">
         <div class="badge-row">
           ${eventTagBadges(event)}
@@ -1609,16 +1609,18 @@ function openEventDetail(eventId) {
   qs(".detail-main").innerHTML = `
     <section class="detail-section description-card">
       <figure class="detail-photo">
-        <img src="${event.image}" alt="${event.title}" loading="lazy">
+        <img src="${event.image}" alt="${event.title}" loading="lazy" onerror="this.closest('figure').classList.add('image-failed'); this.remove();">
       </figure>
-      <h3>Description</h3>
-      <p>${event.description}</p>
+      <div class="detail-description-box">
+        <h3>Description</h3>
+        <p>${event.description}</p>
+      </div>
     </section>
     <section class="detail-section">
       <h3>What to expect</h3>
       <p>${event.expect}</p>
     </section>
-    <section class="detail-section">
+    <section class="detail-section detail-recommendation-section">
       <h3>Why TAYO recommended it</h3>
       <p>TAYO matched this against ${state.profile.yearLevel}, ${state.profile.course}, selected interests, subtags, and ${personalityTypes[state.profile.personality].title}.</p>
       <ul class="detail-list">${event.match.reasons.map((reason) => `<li><strong>Match reason:</strong> ${reason}</li>`).join("")}</ul>

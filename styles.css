@@ -8970,3 +8970,734 @@ body[data-route="map"] .place-pin.food.active {
   font-weight: 900 !important;
   line-height: 1 !important;
 }
+
+/* Final image cleanup: consistent event photos and clean broken-image fallback */
+.home-event-card .event-card-photo,
+.event-photo,
+.detail-photo,
+.place-photo {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 18px !important;
+  background:
+    linear-gradient(135deg, rgba(74, 64, 57, 0.12), rgba(248, 194, 65, 0.18)),
+    var(--surface-2) !important;
+}
+
+.home-event-card .event-card-photo {
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  margin: 0 0 12px !important;
+}
+
+.detail-photo {
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  margin: 0 0 14px !important;
+}
+
+.place-photo {
+  aspect-ratio: 16 / 10 !important;
+}
+
+.home-event-card .event-card-photo img,
+.event-photo img,
+.detail-photo img,
+.place-photo img,
+.event-thumb {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.home-event-card .event-card-photo.image-failed,
+.event-photo.image-failed,
+.detail-photo.image-failed,
+.place-photo.image-failed {
+  min-height: 150px !important;
+  display: grid !important;
+  place-items: center !important;
+}
+
+.home-event-card .event-card-photo.image-failed::after,
+.event-photo.image-failed::after,
+.detail-photo.image-failed::after,
+.place-photo.image-failed::after {
+  content: "Photo unavailable";
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.event-thumb.image-failed {
+  background:
+    linear-gradient(135deg, rgba(74, 64, 57, 0.12), rgba(248, 194, 65, 0.18)),
+    var(--surface-2) !important;
+}
+
+/* Final Quick Match list cleanup */
+body[data-route="quickmatch"] .event-list {
+  gap: 14px !important;
+  padding-bottom: 150px !important;
+}
+
+body[data-route="quickmatch"] .event-row {
+  display: grid !important;
+  grid-template-columns: 96px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+  padding: 12px !important;
+  border: 1.5px solid var(--ink) !important;
+  border-radius: 20px !important;
+  background: var(--surface) !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-thumb {
+  width: 96px !important;
+  height: 132px !important;
+  border-radius: 16px !important;
+  object-fit: cover !important;
+  align-self: stretch !important;
+}
+
+body[data-route="quickmatch"] .event-row-body {
+  display: grid !important;
+  grid-template-rows: auto auto auto 1fr auto !important;
+  min-width: 0 !important;
+}
+
+body[data-route="quickmatch"] .event-row .badge-row {
+  display: flex !important;
+  gap: 5px !important;
+  overflow: hidden !important;
+  margin-bottom: 4px !important;
+}
+
+body[data-route="quickmatch"] .event-row .badge-row .badge:nth-child(n+4) {
+  display: none !important;
+}
+
+body[data-route="quickmatch"] .event-row h3 {
+  margin: 0 0 4px !important;
+  font-size: 24px !important;
+  line-height: 0.95 !important;
+  letter-spacing: -0.02em !important;
+}
+
+body[data-route="quickmatch"] .event-row p {
+  margin: 0 0 7px !important;
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  color: var(--muted) !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  margin: 0 0 8px !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta span {
+  max-width: 100% !important;
+  padding: 5px 8px !important;
+  border: 1.25px solid var(--line-strong) !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta span:nth-child(n+3) {
+  display: none !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions {
+  display: grid !important;
+  grid-template-columns: 42px 42px minmax(78px, 1fr) !important;
+  gap: 8px !important;
+  align-items: center !important;
+  margin-top: 4px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions button {
+  min-height: 42px !important;
+  height: 42px !important;
+  padding: 0 10px !important;
+  border-radius: 18px !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .compact-action {
+  width: 42px !important;
+  min-width: 42px !important;
+  padding: 0 !important;
+  font-size: 18px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .primary {
+  background: var(--ink) !important;
+  color: var(--surface) !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .secondary {
+  background: var(--figma-yellow) !important;
+  color: var(--ink) !important;
+}
+
+/* Center Quick Match list thumbnails inside their cards */
+body[data-route="quickmatch"] .event-row {
+  align-items: center !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-thumb {
+  align-self: center !important;
+}
+
+/* Refine Quick Match list proportions */
+body[data-route="quickmatch"] .event-row {
+  grid-template-columns: 92px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  padding: 12px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-thumb {
+  width: 92px !important;
+  height: 108px !important;
+  aspect-ratio: 92 / 108 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: 15px !important;
+}
+
+body[data-route="quickmatch"] .event-row h3 {
+  font-size: 20px !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+}
+
+body[data-route="quickmatch"] .event-row p {
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  margin-bottom: 6px !important;
+}
+
+body[data-route="quickmatch"] .event-row .badge {
+  font-size: 10px !important;
+  padding: 5px 8px !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta span {
+  font-size: 10px !important;
+  padding: 5px 8px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions button {
+  min-height: 38px !important;
+  height: 38px !important;
+  border-radius: 16px !important;
+  font-size: 12px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .compact-action {
+  width: 38px !important;
+  min-width: 38px !important;
+  font-size: 17px !important;
+}
+
+/* TEST: Quick Match list cards as photo backgrounds */
+body[data-route="quickmatch"] .event-row {
+  position: relative !important;
+  display: block !important;
+  min-height: 260px !important;
+  padding: 14px !important;
+  overflow: hidden !important;
+  border: 1.5px solid var(--ink) !important;
+  border-radius: 24px !important;
+  background: var(--surface-2) !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-thumb {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  z-index: 0 !important;
+}
+
+body[data-route="quickmatch"] .event-row::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.18) 42%,
+      rgba(0, 0, 0, 0.35) 100%
+    ) !important;
+  pointer-events: none !important;
+}
+
+body[data-route="quickmatch"] .event-row-body {
+  position: relative !important;
+  z-index: 2 !important;
+  display: grid !important;
+  gap: 6px !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  padding: 12px !important;
+  border: 1.25px solid rgba(67, 55, 48, 0.5) !important;
+  border-radius: 20px !important;
+  background: rgba(255, 249, 240, 0.84) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18) !important;
+}
+
+body[data-route="quickmatch"] .event-row h3 {
+  font-size: 23px !important;
+  line-height: 0.96 !important;
+  margin: 0 !important;
+}
+
+body[data-route="quickmatch"] .event-row p {
+  font-size: 12px !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+  color: var(--muted) !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+body[data-route="quickmatch"] .event-row .badge-row {
+  display: flex !important;
+  gap: 5px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+
+body[data-route="quickmatch"] .event-row .badge-row .badge:nth-child(n+4) {
+  display: none !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  margin: 0 !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta span {
+  max-width: 100% !important;
+  padding: 5px 8px !important;
+  border: 1.25px solid var(--line-strong) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 249, 240, 0.78) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+body[data-route="quickmatch"] .event-row .meta span:nth-child(n+3) {
+  display: none !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions {
+  display: grid !important;
+  grid-template-columns: 38px 38px minmax(78px, 1fr) !important;
+  gap: 8px !important;
+  margin-top: 4px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions button {
+  min-height: 38px !important;
+  height: 38px !important;
+  padding: 0 10px !important;
+  border-radius: 16px !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .compact-action {
+  width: 38px !important;
+  min-width: 38px !important;
+  padding: 0 !important;
+  font-size: 17px !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .primary {
+  background: var(--ink) !important;
+  color: var(--surface) !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions .secondary {
+  background: var(--figma-yellow) !important;
+  color: var(--ink) !important;
+}
+
+/* Center Quick Match photo-card content */
+body[data-route="quickmatch"] .event-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 270px !important;
+}
+
+body[data-route="quickmatch"] .event-row-body {
+  width: min(88%, 360px) !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  justify-items: center !important;
+  align-content: center !important;
+}
+
+body[data-route="quickmatch"] .event-row h3,
+body[data-route="quickmatch"] .event-row p {
+  text-align: center !important;
+}
+
+body[data-route="quickmatch"] .event-row .badge-row,
+body[data-route="quickmatch"] .event-row .meta {
+  justify-content: center !important;
+}
+
+body[data-route="quickmatch"] .event-row .event-actions {
+  width: 100% !important;
+  max-width: 230px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* TEST: Better mobile event detail layout */
+.iphone-screen .detail-overlay,
+.detail-overlay.open {
+  padding: 58px 0 0 !important;
+}
+
+.iphone-screen .detail-modal {
+  min-height: calc(100% - 58px) !important;
+  max-height: calc(100% - 58px) !important;
+  overflow-y: auto !important;
+}
+
+.iphone-screen .detail-head {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 20 !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 46px !important;
+  gap: 10px !important;
+  padding: 12px 16px 10px !important;
+  border-bottom: 1.25px solid var(--line-strong) !important;
+  background: rgba(255, 249, 240, 0.94) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.iphone-screen .detail-head .badge-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 5px !important;
+  max-height: 58px !important;
+  overflow: hidden !important;
+}
+
+.iphone-screen .detail-head .badge-row .badge {
+  padding: 5px 8px !important;
+  font-size: 10px !important;
+}
+
+.iphone-screen .detail-head h2 {
+  margin: 8px 0 4px !important;
+  font-size: 36px !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.iphone-screen .detail-head #detailSubtitle {
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.28 !important;
+  color: var(--muted) !important;
+}
+
+.iphone-screen .close-detail {
+  position: static !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 14px !important;
+  font-size: 22px !important;
+}
+
+.iphone-screen .detail-body {
+  display: block !important;
+  padding: 14px 14px 36px !important;
+}
+
+.iphone-screen .detail-main {
+  display: grid !important;
+  gap: 14px !important;
+  padding-bottom: 28px !important;
+}
+
+.iphone-screen .description-card {
+  display: grid !important;
+  gap: 14px !important;
+  padding: 14px !important;
+  border: 1.5px solid var(--ink) !important;
+  border-radius: 24px !important;
+  background: var(--paper) !important;
+}
+
+.iphone-screen .detail-photo {
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  margin: 0 !important;
+  border: 1.25px solid var(--line-strong) !important;
+  border-radius: 18px !important;
+  background: var(--surface-2) !important;
+}
+
+.iphone-screen .detail-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background: var(--surface-2) !important;
+}
+
+.iphone-screen .description-card h3,
+.iphone-screen .detail-section h3 {
+  margin: 0 0 6px !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+.iphone-screen .description-card p,
+.iphone-screen .detail-section p,
+.iphone-screen .detail-list {
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+}
+
+/* TEST: Make detail photo feel full-width, not boxed */
+.iphone-screen .description-card {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.iphone-screen .description-card .detail-photo {
+  width: calc(100% + 28px) !important;
+  margin: 0 -14px 18px !important;
+  border: 0 !important;
+  border-radius: 0 0 24px 24px !important;
+  background: transparent !important;
+  aspect-ratio: 16 / 10 !important;
+}
+
+.iphone-screen .description-card .detail-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background: var(--paper) !important;
+}
+
+.iphone-screen .description-card h3,
+.iphone-screen .description-card p {
+  padding-left: 14px !important;
+  padding-right: 14px !important;
+}
+
+.iphone-screen .description-card p {
+  margin-bottom: 8px !important;
+}
+
+/* TEST: Detail description as its own card + hide recommendation explanation for now */
+.iphone-screen .detail-description-box {
+  margin: 0 14px 16px !important;
+  padding: 16px !important;
+  border: 1.5px solid var(--line-strong) !important;
+  border-radius: 20px !important;
+  background: var(--paper) !important;
+}
+
+.iphone-screen .detail-description-box h3 {
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+.iphone-screen .detail-description-box p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+}
+
+.iphone-screen .detail-recommendation-section {
+  display: none !important;
+}
+
+/* TEST: Consistent event detail hero + tighter detail cards */
+.iphone-screen .detail-body {
+  padding: 0 0 28px !important;
+}
+
+.iphone-screen .detail-main {
+  gap: 12px !important;
+  padding-bottom: 24px !important;
+}
+
+.iphone-screen .description-card {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.iphone-screen .description-card .detail-photo {
+  width: 100% !important;
+  height: 255px !important;
+  aspect-ratio: auto !important;
+  margin: 0 0 14px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--surface-2) !important;
+}
+
+.iphone-screen .description-card .detail-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  background: var(--surface-2) !important;
+}
+
+.iphone-screen .detail-description-box,
+.iphone-screen .detail-section,
+.iphone-screen .detail-side-card {
+  width: calc(100% - 44px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 12px !important;
+  padding: 16px !important;
+  border: 1.5px solid var(--line-strong) !important;
+  border-radius: 22px !important;
+  background: var(--paper) !important;
+  box-shadow: none !important;
+}
+
+.iphone-screen .detail-description-box {
+  margin-top: 0 !important;
+}
+
+.iphone-screen .detail-section h3,
+.iphone-screen .detail-description-box h3,
+.iphone-screen .detail-side-card h3 {
+  margin: 0 0 8px !important;
+  padding: 0 !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+}
+
+.iphone-screen .detail-section p,
+.iphone-screen .detail-description-box p,
+.iphone-screen .detail-side-card p,
+.iphone-screen .detail-list {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+}
+
+.iphone-screen .detail-head {
+  padding-bottom: 12px !important;
+}
+
+/* FIX: Detail photo should not sit inside a card; only text sections are boxed */
+.iphone-screen .description-card,
+.iphone-screen .detail-main .description-card {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.iphone-screen .description-card .detail-photo {
+  width: 100% !important;
+  height: 250px !important;
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--surface-2) !important;
+  overflow: hidden !important;
+}
+
+.iphone-screen .description-card .detail-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 0 !important;
+}
+
+.iphone-screen .detail-description-box {
+  width: calc(100% - 52px) !important;
+  margin: 0 auto 10px !important;
+  padding: 15px 16px !important;
+  border: 1.5px solid var(--line-strong) !important;
+  border-radius: 22px !important;
+  background: var(--paper) !important;
+}
+
+.iphone-screen .detail-main {
+  gap: 8px !important;
+}
+
+.iphone-screen .detail-section:not(.description-card),
+.iphone-screen .detail-side-card {
+  width: calc(100% - 52px) !important;
+  margin: 0 auto 10px !important;
+  padding: 15px 16px !important;
+  border: 1.5px solid var(--line-strong) !important;
+  border-radius: 22px !important;
+  background: var(--paper) !important;
+}
+
+.iphone-screen .detail-section h3,
+.iphone-screen .detail-description-box h3,
+.iphone-screen .detail-side-card h3 {
+  margin: 0 0 8px !important;
+}
+
+.iphone-screen .detail-section p,
+.iphone-screen .detail-description-box p,
+.iphone-screen .detail-side-card p {
+  margin: 0 !important;
+}
