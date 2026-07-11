@@ -1164,10 +1164,15 @@ function assignDemoEventDate(event, index) {
   }
 }
 
+function availableMatchedEvents() {
+  return scoredEvents()
+    .filter((event) => isUpcomingEvent(event) && !state.passedEventIds.has(event.id) && !state.interestedEventIds.has(event.id));
+}
+
 function renderHome() {
   const topEvent = currentQuickMatchEvent();
-  const recommendedEvents = scoredEvents()
-    .filter((event) => isUpcomingEvent(event) && !state.passedEventIds.has(event.id) && !state.interestedEventIds.has(event.id))
+  const availableEvents = availableMatchedEvents();
+  const recommendedEvents = availableEvents
     .sort((a, b) => eventDateTimeValue(a) - eventDateTimeValue(b))
     .slice(0, 5);
   const savedEvents = scoredEvents().filter((event) => state.interestedEventIds.has(event.id));
@@ -1175,7 +1180,7 @@ function renderHome() {
   qs("#homeTypeLabel").textContent = "Recommended Events for You";
   qs("#homeHeadline").textContent = `HELLO, ${firstName.toUpperCase()}`;
   qs("#homeSummary").textContent = todayLabel();
-  qs("#matchCountStat").textContent = filteredEvents().length;
+  qs("#matchCountStat").textContent = availableEvents.length;
   qs("#interestCountStat").textContent = state.interestedEventIds.size;
   qs("#interestedCountStat").textContent = state.interestedEventIds.size;
   qs("#homeTopEventTitle").textContent = "Recommended Events for You";
@@ -1185,7 +1190,7 @@ function renderHome() {
       <p>${todayLabel()}</p>
       <h2>HELLO, ${firstName.toUpperCase()}</h2>
     </div>
-    <article class="home-stat-card pink"><strong>${events.length}</strong><span>matched events</span></article>
+    <article class="home-stat-card pink"><strong>${availableEvents.length}</strong><span>matches left</span></article>
     <article class="home-stat-card yellow"><strong>${savedEvents.length}</strong><span>interested</span></article>
     <section class="home-recommended-table">
       <h3>Recommended Events for You</h3>
