@@ -1182,7 +1182,6 @@ main {
   width: 18px;
   height: 18px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .place-pin-icon[hidden],
@@ -1201,7 +1200,7 @@ main {
   background: var(--teal);
 }
 
-.place-pin.food { background: var(--coral); }
+.place-pin.food { background: #ece7df; color: var(--ink); }
 .place-pin.transport { background: var(--blue); }
 .place-pin.essentials { background: var(--sun); color: #422f0a; }
 .place-pin.study { background: var(--green); }
@@ -8936,4 +8935,28 @@ body.tour-active .iphone-screen .iphone-status {
   z-index: 9001 !important;
   background: var(--paper) !important;
   color: var(--ink) !important;
+}
+
+/* Map pin color tuning: keep food pins neutral gray instead of coral/white */
+body[data-route="map"] .place-pin.food {
+  background: #bdb7ad !important;
+  color: var(--ink) !important;
+}
+
+body[data-route="map"] .place-pin.food.active {
+  background: #bdb7ad !important;
+}
+
+/* FINAL food pin override: dark neutral background for yellow utensils */
+.map-board .place-pin.food,
+body[data-route="map"] .map-board .place-pin.food,
+body[data-route="map"] .place-pin.food {
+  background: #4a4039 !important;
+  color: white !important;
+}
+
+.map-board .place-pin.food.active,
+body[data-route="map"] .map-board .place-pin.food.active,
+body[data-route="map"] .place-pin.food.active {
+  background: #4a4039 !important;
 }
