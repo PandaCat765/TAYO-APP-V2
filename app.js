@@ -1842,13 +1842,10 @@ function bindListeners() {
     const button = event.target.closest("[data-interest]");
     if (!button) return;
     const interest = button.dataset.interest;
-    if (state.profile.interests.includes(interest)) {
-      state.profile.interests = state.profile.interests.filter((item) => item !== interest);
-      const group = interestGroups.find((item) => item.id === interest);
-      if (group) state.profile.subtags = state.profile.subtags.filter((tag) => !group.subtags.includes(tag));
-    } else {
-      state.profile.interests.push(interest);
-    }
+
+    // Main interest cards only switch the visible subtag group.
+    // They turn blue only when at least one subtag in that group is selected.
+    state.selectedInterestForSubtags = interest;
     renderInterestTags();
     renderSubtags(interest);
   });
@@ -2007,16 +2004,11 @@ function bindListeners() {
     const button = event.target.closest("[data-profile-interest]");
     if (!button) return;
     const interest = button.dataset.profileInterest;
+
+    // Main interest cards only switch the visible subtag group.
+    // They turn blue only when at least one subtag in that group is selected.
     state.profileSelectedInterestForSubtags = interest;
-    if (state.profile.interests.includes(interest)) {
-      state.profile.interests = state.profile.interests.filter((item) => item !== interest);
-      const group = interestGroups.find((item) => item.id === interest);
-      if (group) state.profile.subtags = state.profile.subtags.filter((tag) => !group.subtags.includes(tag));
-    } else {
-      state.profile.interests.push(interest);
-    }
-    renderApp();
-    routeTo("profile");
+    renderProfileInterestEditor();
   });
 
   qs("#profileSubtagGrid").addEventListener("click", (event) => {
