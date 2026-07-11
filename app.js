@@ -1063,6 +1063,19 @@ function routeTo(route) {
   window.scrollTo(0, 0);
 }
 
+function todayLabel() {
+  const today = new Date();
+  const date = today.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  });
+  const weekday = today.toLocaleDateString("en-US", {
+    weekday: "long"
+  });
+  return `Today is ${date} -- ${weekday}`;
+}
+
 function renderApp() {
   renderTopProfile();
   renderHome();
@@ -1088,7 +1101,7 @@ function renderHome() {
   const firstName = state.profile.name.split(" ")[0] || "Username";
   qs("#homeTypeLabel").textContent = "Recommended Events for You";
   qs("#homeHeadline").textContent = `HELLO, ${firstName.toUpperCase()}`;
-  qs("#homeSummary").textContent = "Today is June 27, 2026 -- Saturday";
+  qs("#homeSummary").textContent = todayLabel();
   qs("#matchCountStat").textContent = filteredEvents().length;
   qs("#interestCountStat").textContent = state.interestedEventIds.size;
   qs("#interestedCountStat").textContent = state.interestedEventIds.size;
@@ -1096,7 +1109,7 @@ function renderHome() {
   qs("#homeTopEventBody").textContent = topEvent ? `${topEvent.match.score}% match. ${dateLabel(topEvent)}. ${topEvent.description}` : "Restore items from Archive or restart the flow to review everything again.";
   qs("#homeCards").innerHTML = `
     <div class="home-greeting">
-      <p>Today is June 27, 2026 -- Saturday</p>
+      <p>${todayLabel()}</p>
       <h2>HELLO, ${firstName.toUpperCase()}</h2>
     </div>
     <article class="home-stat-card pink"><strong>${events.length}</strong><span>matched events</span></article>
