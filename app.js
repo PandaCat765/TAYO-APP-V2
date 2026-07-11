@@ -213,14 +213,37 @@ const categoryPinLabels = {
   landmarks: "Mk"
 };
 
-const monthMeta = {
-  Aug: { year: 2027, monthIndex: 7 },
-  Sep: { year: 2027, monthIndex: 8 },
-  Oct: { year: 2027, monthIndex: 9 },
-  Nov: { year: 2027, monthIndex: 10 },
-  Dec: { year: 2027, monthIndex: 11 },
-  Jan: { year: 2027, monthIndex: 0 }
-};
+function getDemoToday() {
+  const params = new URLSearchParams(window.location.search);
+  const rawDate = params.get("demoDate") || localStorage.getItem("tayoDemoDate");
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(rawDate || "")) {
+    const [year, month, day] = rawDate.split("-").map(Number);
+    return new Date(year, month - 1, day);
+  }
+
+  return new Date();
+}
+
+const demoToday = getDemoToday();
+const demoStartYear = demoToday.getFullYear();
+const demoStartMonthIndex = demoToday.getMonth();
+
+function shortMonthName(monthIndex) {
+  return new Date(2000, monthIndex, 1).toLocaleDateString("en-US", { month: "short" });
+}
+
+function buildDemoMonthMeta() {
+  const entries = [];
+  for (let monthIndex = demoStartMonthIndex; monthIndex <= 11; monthIndex += 1) {
+    entries.push([shortMonthName(monthIndex), { year: demoStartYear, monthIndex }]);
+  }
+  entries.push(["Jan", { year: demoStartYear + 1, monthIndex: 0 }]);
+  return Object.fromEntries(entries);
+}
+
+const monthMeta = buildDemoMonthMeta();
+const demoMonthKeys = Object.keys(monthMeta);
 
 const events = [
   { id: "tennis", title: "Tennis at Valle Verde", type: "social", location: "Outside Gate 3 to Valle Verde", area: "outside", day: "Mon", time: "4:30 PM", deadline: "Mon 12:00 PM", interests: ["sports", "friends"], subtags: ["tennis", "beginner games", "arrive together"], energy: "outgoing", commitment: "1.5 hours", beginner: true, alone: false, group: "small", schoolTags: ["SOM", "SOSE", "SOH", "SOSS"], personalityFit: ["active", "outgoing"], expect: "Meet at Gate 3, walk or ride together to Valle Verde, then rotate beginner-friendly games.", goodFor: "Students who want an active plan outside campus but prefer arriving with a group.", bring: "Rubber shoes, water, and racket if you have one.", description: "Outgoing social gathering for students who want a sporty first hangout." },
@@ -374,8 +397,7 @@ events.forEach((event, index) => {
   const override = eventOverrides[event.id] || {};
   Object.assign(event, media);
   Object.assign(event, override);
-  event.month = event.month || ["Aug", "Sep", "Oct", "Nov", "Dec"][index % 5];
-  event.dateNumber = event.dateNumber || ((index * 3) % 26) + 2;
+  assignDemoEventDate(event, index);
   event.venue = event.venue || "indoor";
   event.access = event.access || "open";
   event.image = event.image || defaultEventImages[event.type] || defaultEventImages.social;
@@ -542,7 +564,7 @@ function renderMapPinIcon(value, label) {
   `;
 }
 
-const months = ["all", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"];
+const months = ["all", ...demoMonthKeys];
 
 const personalityQuestions = [
   {
@@ -1064,7 +1086,7 @@ function routeTo(route) {
 }
 
 function todayLabel() {
-  const today = new Date();
+  const today = demoToday;
   const date = today.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
@@ -1094,9 +1116,60 @@ function renderTopProfile() {
   qs("#avatarInitials").textContent = state.profile.name.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase();
 }
 
+function eventDateObject(event) {
+  const meta = monthMeta[event.month] || monthMeta[demoMonthKeys[0]];
+  return new Date(meta.year, meta.monthIndex, event.dateNumber || 1, 0, 0, 0, 0);
+}
+
+function eventDateTimeValue(event) {
+  const baseDate = eventDateObject(event);
+  const timeValue = timeSortValue(event.time || "");
+  const hours = Math.floor(timeValue / 60);
+  const minutes = timeValue % 60;
+  baseDate.setHours(hours, minutes, 0, 0);
+  return baseDate.getTime();
+}
+
+function isUpcomingEvent(event) {
+  const now = new Date(demoToday);
+  const eventTime = eventDateTimeValue(event);
+  now.setHours(0, 0, 0, 0);
+  return eventTime >= now.getTime();
+}
+
+function assignDemoEventDate(event, index) {
+  const monthKey = demoMonthKeys[index % demoMonthKeys.length];
+  const meta = monthMeta[monthKey];
+  const daysInMonth = new Date(meta.year, meta.monthIndex + 1, 0).getDate();
+
+  const clusteredDays = [3, 6, 9, 12, 15, 18, 20, 23, 25, 27];
+  const baseDay = clusteredDays[Math.floor(index / demoMonthKeys.length) % clusteredDays.length];
+  const dateNumber = Math.min(baseDay, daysInMonth);
+
+  const eventDate = new Date(meta.year, meta.monthIndex, dateNumber);
+  const day = eventDate.toLocaleDateString("en-US", { weekday: "short" });
+
+  event.month = monthKey;
+  event.dateNumber = dateNumber;
+  event.day = day;
+
+  if (!event.deadline || /^n\/?a$/i.test(event.deadline) || /no sign-up/i.test(event.signupQuantity || "")) {
+    event.deadline = "N/A";
+  } else if (/open/i.test(event.deadline)) {
+    event.deadline = "Open all day";
+  } else {
+    const deadlineDate = new Date(meta.year, meta.monthIndex, Math.max(1, dateNumber - 1));
+    const deadlineMonth = shortMonthName(deadlineDate.getMonth());
+    event.deadline = `${deadlineMonth} ${deadlineDate.getDate()}, ${deadlineDate.getFullYear()}, 10:00 AM`;
+  }
+}
+
 function renderHome() {
   const topEvent = currentQuickMatchEvent();
-  const recommendedEvents = scoredEvents().filter((event) => !state.passedEventIds.has(event.id) && !state.interestedEventIds.has(event.id)).slice(0, 5);
+  const recommendedEvents = scoredEvents()
+    .filter((event) => isUpcomingEvent(event) && !state.passedEventIds.has(event.id) && !state.interestedEventIds.has(event.id))
+    .sort((a, b) => eventDateTimeValue(a) - eventDateTimeValue(b))
+    .slice(0, 5);
   const savedEvents = scoredEvents().filter((event) => state.interestedEventIds.has(event.id));
   const firstName = state.profile.name.split(" ")[0] || "Username";
   qs("#homeTypeLabel").textContent = "Recommended Events for You";
