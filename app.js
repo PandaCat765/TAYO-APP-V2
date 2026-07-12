@@ -408,6 +408,8 @@ events.forEach((event, index) => {
   event.extraTags = event.extraTags || [event.price, event.audience];
 });
 
+forceDemoCalendarTestClusters();
+
 const state = {
   registeredEmail: "",
   role: "student",
@@ -1197,6 +1199,36 @@ function assignDemoEventDate(event, index) {
   }
 }
 
+function forceDemoCalendarTestClusters() {
+  const targetMonth = demoMonthKeys[0];
+  const meta = monthMeta[targetMonth];
+  if (!meta) return;
+
+  const forcedDates = {
+    moonrabbit: 3,
+    creator: 9
+  };
+
+  events.forEach((event) => {
+    const forcedDay = forcedDates[event.id];
+    if (!forcedDay) return;
+
+    const daysInMonth = new Date(meta.year, meta.monthIndex + 1, 0).getDate();
+    const dateNumber = Math.min(forcedDay, daysInMonth);
+    const eventDate = new Date(meta.year, meta.monthIndex, dateNumber);
+
+    event.month = targetMonth;
+    event.dateNumber = dateNumber;
+    event.day = eventDate.toLocaleDateString("en-US", { weekday: "short" });
+
+    if (event.deadline && !/^n\/?a$/i.test(event.deadline) && !/open/i.test(event.deadline) && !/no sign-up/i.test(event.signupQuantity || "")) {
+      const deadlineDate = new Date(meta.year, meta.monthIndex, Math.max(1, dateNumber - 1));
+      const deadlineMonth = shortMonthName(deadlineDate.getMonth());
+      event.deadline = `${deadlineMonth} ${deadlineDate.getDate()}, ${deadlineDate.getFullYear()}, 10:00 AM`;
+    }
+  });
+}
+
 function availableMatchedEvents() {
   return scoredEvents()
     .filter((event) => isUpcomingEvent(event) && !state.passedEventIds.has(event.id) && !state.interestedEventIds.has(event.id));
@@ -1321,13 +1353,15 @@ function renderEventOverview() {
   qs("#overviewMonth").value = state.activeOverviewMonth;
   const visible = events.filter((event) => state.activeOverviewMonth === "all" || event.month === state.activeOverviewMonth);
   const grouped = months.filter((month) => month !== "all").map((month) => [month, visible.filter((event) => event.month === month)]).filter(([, items]) => items.length);
+  const selectedMonth = state.selectedCalendarDay ? state.selectedCalendarDay.split(":")[0] : null;
   const sections = grouped.map(([month, items]) => `
     <section class="calendar-month two-week-mode">
       <h3>${month} ${monthMeta[month].year}</h3>
       ${renderTwoWeekCalendar(month, items)}
     </section>
+    ${selectedMonth === month ? renderSelectedCalendarDay() : ""}
   `).join("");
-  qs("#eventCalendar").innerHTML = sections + renderSelectedCalendarDay();
+  qs("#eventCalendar").innerHTML = sections;
 }
 
 function renderMonthCalendar(month, items) {
@@ -1409,8 +1443,10 @@ function renderTwoWeekCalendar(month, items) {
         ${Array.from({ length: end - start + 1 }, (_, index) => {
           const date = start + index;
           const dateEvents = byDate.get(date) || [];
+          const dayKey = `${month}:${date}`;
+          const isSelected = state.selectedCalendarDay === dayKey;
           return `
-            <button class="two-week-day ${dateEvents.length ? "has-events" : ""}" type="button" data-calendar-day="${month}:${date}">
+            <button class="two-week-day ${dateEvents.length ? "has-events" : ""} ${isSelected ? "selected-day" : ""}" type="button" data-calendar-day="${dayKey}" aria-pressed="${isSelected ? "true" : "false"}">
               <strong>${date}</strong>
               ${dateEvents.slice(0, 2).map((event) => `<span>${event.title}</span>`).join("")}
             </button>

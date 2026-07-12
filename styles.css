@@ -9832,3 +9832,18 @@ body[data-panel="interests"] .form-actions {
 body[data-panel="interests"] .form-actions {
   grid-template-columns: 84px 1fr !important;
 }
+
+/* FINAL selected Event Overview date state */
+body[data-route="events"] .two-week-day.selected-day,
+body[data-route="events"] .two-week-day.has-events.selected-day {
+  background: #d96c86 !important;
+  border: 2px solid var(--ink) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 20px rgba(64, 54, 49, 0.22) !important;
+}
+
+body[data-route="events"] .two-week-day.selected-day strong,
+body[data-route="events"] .two-week-day.selected-day span {
+  color: white !important;
+}
