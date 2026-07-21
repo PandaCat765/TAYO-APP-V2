@@ -42,10 +42,6 @@ When an event is marked Interested or Pass, it leaves the recommendation queue. 
 
 ## Publish Flow
 
-For the real GitHub repo, sync this folder into `/Users/stephensevilla/Documents/TAYO-App/` with:
+The real GitHub repo is this folder: `/Users/stephensevilla/Documents/Projects/TAYO/app`.
 
-```bash
-rsync -av --delete --exclude=".git" "/Users/stephensevilla/Documents/Codex/2026-06-17/files-mentioned-by-the-user-decsci/tayo-github-pages/" "/Users/stephensevilla/Documents/TAYO-App/"
-```
-
-Then commit and push only from `/Users/stephensevilla/Documents/TAYO-App/`.
+Commit and push only from `/Users/stephensevilla/Documents/Projects/TAYO/app`.

@@ -1,7 +1,7 @@
 # TAYO App Context
 
 ## Project Folder
-`/Users/stephensevilla/Documents/Codex/2026-06-17/files-mentioned-by-the-user-decsci/tayo-github-pages/`
+`/Users/stephensevilla/Documents/Projects/TAYO/app`
 
 ## Project Type
 - Static HTML/CSS/JS prototype.
