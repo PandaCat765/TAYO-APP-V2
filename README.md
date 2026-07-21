@@ -1,6 +1,10 @@
 # TAYO GitHub Pages Prototype
 
-This is the local GitHub Pages-ready version of the TAYO prototype. Edit this folder first, then sync it into the real cloned GitHub repo when you are ready to publish.
+This folder is the active TAYO V2 Git repository:
+
+`/Users/stephensevilla/Documents/Projects/TAYO/app`
+
+Edit and manage the prototype directly here.
 
 ## Files
 

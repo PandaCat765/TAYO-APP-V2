@@ -143,10 +143,10 @@ This TAYO app has two public versions:
 2. Vercel
 - Vercel should keep the same production link.
 - Vercel should NOT auto-update from every GitHub push.
-- Vercel should only update when the user explicitly says: "update vercel".
-- If the user does not say "update vercel", do not deploy, promote, or update Vercel production.
+- Vercel may update only when the user explicitly says: "PUBLISH TO OFFICIAL VERCEL".
+- Without that exact phrase, do not deploy, promote, or update Vercel production.
 
-When the user says "update vercel", interpret it as:
+When the user says "PUBLISH TO OFFICIAL VERCEL", interpret it as:
 Deploy the current clean committed version of the TAYO app to the existing Vercel production project/link.
 
 Before updating Vercel:
@@ -171,8 +171,8 @@ Then update Vercel:
 
 Important:
 - Normal instruction = commit and push to GitHub only.
-- "update vercel" = deploy/promote current clean committed version to Vercel production.
-- Never update Vercel unless the user explicitly says "update vercel".
+- "PUBLISH TO OFFICIAL VERCEL" = deploy/promote current clean committed version to Vercel production.
+- Never deploy, promote, or update Vercel production unless the user uses exact phrase: "PUBLISH TO OFFICIAL VERCEL".
 
 ## Git / Version Safety Workflow
 - Before every new requested change, run git status.
@@ -191,4 +191,4 @@ Important:
 5. Do not move files unless explicitly asked.
 6. Do not add frameworks/build tools unless explicitly asked.
 7. Do not change app logic when the request is only documentation/deployment.
-8. Do not update Vercel unless the user explicitly says "update vercel".
+8. Do not deploy, promote, or update Vercel production unless the user explicitly says "PUBLISH TO OFFICIAL VERCEL".
